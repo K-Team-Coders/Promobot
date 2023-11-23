@@ -1,7 +1,7 @@
 <template>
   <body class="">
     <Header></Header>
-    <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-56 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-5">
+    <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-56 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-48">
       <div class="z-20">
         <RewiewForm />
       </div>
@@ -12,7 +12,7 @@
       </div>
       <div class="pt-4">
         <div
-          class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-9xl xl:text-9xl lg:text-9xl md:text-9xl sm:text-9xl text-5xl w-20 pt-12"
+          class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl sm:text-7xl text-5xl w-1/2 pt-12"
         >
           Выберите файл для анализа
         </div>

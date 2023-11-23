@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-9xl xl:text-9xl lg:text-9xl md:text-9xl w-20 pt-12 sm:text-9xl text-5xl"
+    class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
   >
     Введите отзыв
   </div>
@@ -43,9 +43,15 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-64 cursor-pointer hover:text-blue-600"
             >
               Группа тем
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 cursor-pointer hover:text-blue-600"
+            >
+              Тема
             </th>
             <th
               scope="col"
@@ -55,9 +61,9 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-[500px] cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
             >
-              Тема
+              Исполнитель
             </th>
           </tr>
         </thead>
@@ -78,9 +84,13 @@
               veritatis aliquid voluptate perferendis? Debitis accusantium saepe
               excepturi. Ea cupiditate a provident.
             </td>
-            <td class="px-6 py-4">
-              Еженедельное закапывание в асфальт пьяных кого-то
+            <td class="px-6 py- text-justify">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
+              eius impedit repudiandae enim tenetur commodi error dolorum
+              nostrum dolore? Tenetur similique maxime placeat repudiandae
+              consequatur quis voluptates officiis dignissimos aspernatur.
             </td>
+            <td class="px-6 py-4">ООО СПАСИ И СОХРАНИ</td>
           </tr>
         </tbody>
       </table>

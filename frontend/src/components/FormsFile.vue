@@ -25,10 +25,10 @@
       </div>
     </form>
   </div>
-  <div class="rounded-lg pt-8">
+  <div class="rounded-lg pt-1">
     <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Результат</p>
     <div
-      class="sm:rounded-lg rounded-lg overflow-auto h-[400px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
+      class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
     >
       <table
         class="w-full text-xs text-gray-500 table-auto 2xl:table-fixed text-center"
@@ -43,9 +43,15 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-64 cursor-pointer hover:text-blue-600"
             >
               Группа тем
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 cursor-pointer hover:text-blue-600"
+            >
+              Тема
             </th>
             <th
               scope="col"
@@ -55,14 +61,15 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-[500px] cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
             >
-              Тема
+              Исполнитель
             </th>
           </tr>
         </thead>
         <tbody class="font-semibold">
-          <tr v-for=" i in 10"
+          <tr
+            v-for="i in 10"
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
           >
             <th
@@ -78,9 +85,13 @@
               veritatis aliquid voluptate perferendis? Debitis accusantium saepe
               excepturi. Ea cupiditate a provident.
             </td>
-            <td class="px-6 py-4">
-              Еженедельное закапывание в асфальт пьяных кого-то
+            <td class="px-6 py- text-justify">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
+              eius impedit repudiandae enim tenetur commodi error dolorum
+              nostrum dolore? Tenetur similique maxime placeat repudiandae
+              consequatur quis voluptates officiis dignissimos aspernatur.
             </td>
+            <td class="px-6 py-4">ООО СПАСИ И СОХРАНИ</td>
           </tr>
         </tbody>
       </table>
