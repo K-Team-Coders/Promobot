@@ -1,19 +1,15 @@
 <template>
-  <header >
-    <nav class="border-b-[3px] border-orangeGod ">
-      <div class="flex justify-between items-center py-3 px-24">
-        <div
-          class="ml-1 flex flex-row gap-2.5 font-mono items-center justify-center"
+  <header class="bg-gradient-to-r from-blue-800 to-blue-600 border-b-[1px] ">
+    <div class="flex justify-center items-center py-2.5 2xl:px-56">
+      <div class="flex text-center items-center justify-center mt-1.5">
+        <a
+          class="xl:text-2xl text-lg font-roboto font-medium hover:text-gray-300 text-whitesmoke"
+          href=""
         >
-          <a
-            class="xl:text-2xl text-lg font-roboto font-semibold hover:text-red-500 text-[#FF7E00]"
-            href=""
-          >
-            My<span class="text-blueGod">Voice's</span></a
-          >
-        </div>
+          Система обработки обращений граждан SCORIC</a
+        >
       </div>
-    </nav>
+    </div>
   </header>
 </template>
 
