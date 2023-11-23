@@ -1,6 +1,5 @@
 <template>
   <body>
-    <Header2></Header2>
     <LoadingPage v-if="isLoading" />
     <div v-else class="bg-idealblack">
       <p
@@ -35,7 +34,6 @@
 </template>
 
 <script>
-import Header2 from "@/components/Header2.vue";
 import Forms from "@/components/Forms.vue";
 import TagCloud from "@/components/TagCloud.vue";
 import Footer from "@/components/Footer.vue";
@@ -45,7 +43,6 @@ import TableMetrics from "@/components/TableMetrics.vue";
 
 export default {
   components: {
-    Header2,
     Forms,
     TagCloud,
     Footer,

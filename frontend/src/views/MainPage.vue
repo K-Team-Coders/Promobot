@@ -1,9 +1,24 @@
 <template>
   <body class="">
     <Header></Header>
-    <div class="bg-idealblack min-h-[700px]">
-      <div class="flex gap-3 pt-14 px-10 justify-center">
-        <FormsFile></FormsFile>
+    <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-56">
+      <div>
+        <RewiewForm />
+      </div>
+      <div class="pt-24">
+        <div class="w-full bg-gray-200 rounded-full h-1">
+          <div class="bg-blue-600 h-1 rounded-full" style="width: 0%"></div>
+        </div>
+      </div>
+      <div class="pt-4">
+        <div
+          class="text-whitesmoke font-black z-[10] font-roboto text-9xl w-20 pt-12"
+        >
+          Выберите файл для анализа
+        </div>
+        <div class="pt-4">
+          <FormsFile></FormsFile>
+        </div>
       </div>
       <div class="sm:px-24 px-8 py-12">
         <QuestionBlog :question_list="question_list"></QuestionBlog>
@@ -18,23 +33,26 @@ import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import FormsFile from "@/components/FormsFile.vue";
 import QuestionBlog from "@/components/QuestionBlog.vue";
-import axios from 'axios';
+import axios from "axios";
+import RewiewForm from "@/components/RewiewForm.vue";
 export default {
-  components: { Header, Footer, FormsFile, QuestionBlog },
-  data(){
-    return{
-      question_list: []
-    }
+  components: { Header, Footer, FormsFile, QuestionBlog, RewiewForm },
+  data() {
+    return {
+      question_list: [],
+    };
   },
-  mounted(){
-  axios.get(`http://${process.env.VUE_APP_USER_IP_WITH_PORT}/tableslist/`).then(response => (this.question_list = response.data.result,
-  console.log(response.data.result)));
-
-  
-}
+  mounted() {
+    axios
+      .get(`http://${process.env.VUE_APP_USER_IP_WITH_PORT}/tableslist/`)
+      .then(
+        (response) => (
+          (this.question_list = response.data.result),
+          console.log(response.data.result)
+        )
+      );
+  },
 };
-
-
 </script>
 
 <style></style>
