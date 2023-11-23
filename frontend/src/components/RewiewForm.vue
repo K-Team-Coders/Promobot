@@ -1,6 +1,6 @@
 <template>
   <div
-    class="text-whitesmoke font-black z-[10] font-roboto text-9xl w-20 pt-12"
+    class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-9xl xl:text-9xl lg:text-9xl md:text-9xl w-20 pt-12 sm:text-9xl text-5xl"
   >
     Введите отзыв
   </div>
