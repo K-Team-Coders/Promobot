@@ -8,6 +8,7 @@
     <form class="w-full">
       <div class="pt-4">
         <input
+          autofocus
           type="text"
           id="large-input"
           class="block w-full p-4 text-gray-900 font-roboto font-medium rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
@@ -25,9 +26,7 @@
   </div>
 
   <div class="rounded-lg pt-1">
-    <p class="text-left pb-2 font-bold text-xl text-whitesmoke">
-      Результат
-    </p>
+    <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Результат</p>
     <div
       class="sm:rounded-lg rounded-lg overflow-auto h-full xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
     >
