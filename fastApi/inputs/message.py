@@ -8,36 +8,22 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 sys.path.append(Path(__file__).parent.parent.joinpath('database').__str__())
-sys.path.append(Path(__file__).parent.parent.joinpath('models').__str__())
-
-logger.debug(sys.path)
 
 from database.dbmodels import MessagesModel
 from database.sqlalchemy import current_session
 
-from models.model_pavlov_all_data.model import pavlov_all
-
-def themeExtraction(text):
-    return pavlov_all.predict(text)
-
-def nerExtraction(text):
-    return ['ner1', 'ner2', 'ner3']
-
-def groupExtraction(text):
-    return 'group'
-
-def organisationExtraction(text):
-    return 'organisation'
+from .extractions import *
 
 class Message(BaseModel):
     message: str
     
 router = APIRouter()
 
-@router.post('/add_message')
-def addNewMessage(item: Message):
+@router.post('/add_message_all_pavlov')
+def addNewMessageAllPavlov(item: Message):
     """
     Основная функция по добавлению сообщения    
+    с помощью модели all_pavlov
     """
     # Получаем сообщение 
     logger.debug(f"Сообщение -- {item}")
@@ -79,6 +65,6 @@ def addNewMessage(item: Message):
             "group": group,
             "theme": theme,
             "date": date.__str__(),
-            "ner": ner,
+            "ner": ner.split(';;;'),
             }
         )

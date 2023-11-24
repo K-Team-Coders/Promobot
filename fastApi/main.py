@@ -6,7 +6,8 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from database.sqlalchemy import current_session, bbase, engine
 
-from inputs import message
+from inputs import message, file
+from services import organisations
 
 app = FastAPI()
 
@@ -17,6 +18,18 @@ app.include_router(
     message.router, 
     prefix="/api",
     tags=["inputs"]
+    )
+
+app.include_router(
+    file.router, 
+    prefix="/api",
+    tags=["inputs"]
+    )
+
+app.include_router(
+    organisations.router, 
+    prefix="/api",
+    tags=["database"]
     )
 
 origins = ["*"]
