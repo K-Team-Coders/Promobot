@@ -1,10 +1,40 @@
+import re
 import sys
 from pathlib import Path
+from loguru import logger
+from geopy.geocoders import Nominatim
 
+import nltk
+from nltk.corpus import stopwords
+from pymystem3 import Mystem
+from string import punctuation
+
+mystem = Mystem() 
+russian_stopwords = stopwords.words("russian")
+
+nltk.download("stopwords")
 sys.path.append(Path(__file__).parent.parent.joinpath('models').__str__())
 
 from models.model_pavlov_all_data.model import pavlov_all
+from models.model_group.model import pavlov_group_all
 from models.ner.model import nner
+
+geolocator = Nominatim(user_agent="promobot_k_team")
+
+def preprocessText(text):
+    text= re.sub(r"https?://\S+", "", text)
+    text= " ".join([w for w in text.split() if w.isalpha()])
+    text=re.sub(r"<.*?>", " ", text)
+    text=re.sub(r"\b[0-9]+\b\s*", "", text)
+    text = re.sub(r'(.)\1{3,}',r'\1', text)
+    text=" ".join([w for w in text.split() if not w.isdigit()])
+    tokens = mystem.lemmatize(text.lower()) 
+    tokens = [token for token in tokens if token not in russian_stopwords\
+              and token != " " \
+              and token.strip() not in punctuation]
+    
+    text = " ".join(tokens)
+    return text
 
 def themeExtraction(text):
     """
@@ -15,14 +45,18 @@ def themeExtraction(text):
     return pavlov_all.predict(text)
 
 def nerExtraction(text):
+    """
+    Извлечение именованных сущностей
+    """
+    logger.debug(text)
+
     markup = nner(text)
 
     text_spans = markup.spans
 
-    print(text_spans)
-
     if len(text_spans) == 0:
         return ["В тексте именованные сущности не обнаружены"]
+    
     ners = []
     for span in text_spans:
         ners.append(
@@ -33,8 +67,48 @@ def nerExtraction(text):
         )
     return ners
 
+def locExtraction(ners):
+    logger.debug(ners)
+
+    locs = []
+    
+    # Отбраковка багов
+    if type(ners) == type(list()):
+
+        # Если нера нет
+        if type(ners[0]) == type('s'): return locs
+    
+        for ner in ners:
+            if ner["named_entity"] == "LOC":
+                locs.append(ner["token"])
+    return locs
+
+def coordsExtraction(loc):
+    """
+    Выборка координат если есть локации в НЕР
+    """
+    logger.debug(loc)
+
+    coords = []
+
+    # Проверка багов
+    if type(loc) == type(list()) and len(loc) != 0:
+        # Проверка типов
+        if type(loc[0]) == type('s'):
+
+            for subloc in loc:
+                location = geolocator.geocode(str(subloc))
+                if location:
+                    coords.append((location.latitude, location.longitude))
+
+            return coords    
+
+        return []
+    
+    return []
+
 def groupExtraction(text):
-    return 'group'
+    return pavlov_group_all.predict(text)
 
 def organisationExtraction(text):
     return 'organisation'
