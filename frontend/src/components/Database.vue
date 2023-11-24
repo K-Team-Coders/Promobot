@@ -1,34 +1,12 @@
 <template>
   <div>
     <div
-      class="bg-gray-50 w-full px-4 py-4 border-[1.5px] shadow-md rounded-lg"
+      class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
     >
-      <form action="">
-        <div class="flex justify-start">
-          <input
-            v-on:change="handleFilesUpload()"
-            class="w-full text-sm text-gray-700 border-[0.5px] py-1 px-2 border-blue-500 rounded-lg cursor-pointer bg-gray-50 focus:outline-none"
-            aria-describedby="file_input_help"
-            id="files"
-            ref="files"
-            type="file"
-          />
-          <p class="mt-2.5 ml-2 text-sm text-gray-500" id="file_input_help">
-            .csv
-          </p>
-        </div>
-        <div class="flex justify-end pt-2">
-          <button
-            @click="submitFiles()"
-            type="submit"
-            class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 duration-150 focus:outline-none focus:ring-blue-700 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-2"
-          >
-            Отправить файл
-          </button>
-        </div>
-      </form>
+      База данных обращений
     </div>
-    <div v-if="isLoading" role="status" class="flex justify-center py-20">
+    
+    <div v-if="isLoading" role="status" class="flex justify-center pt-20">
       <svg
         aria-hidden="true"
         class="inline w-20 h-20 text-gray-200 animate-spin fill-blue-600"
@@ -115,7 +93,7 @@
           </thead>
           <tbody class="font-semibold">
             <tr
-              v-for="(el, index) in response_data" :key="index"
+              v-for="(el, index) in responed_data" :key="index"
               class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
             >
               <th
@@ -134,7 +112,7 @@
                   <li v-for="loc in el.loc" :key="loc">{{ loc }} </li>
                 </ul>
               </td>
-              <td class="px-6 py-4 text-center">{{ el.text }}</td>
+              <td class="px-6 py-4 text-center">{{ el.message }}</td>
               <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
                 <select
                   id="companyFile"
@@ -159,7 +137,7 @@
         </table>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -172,44 +150,32 @@ export default {
   },
   data() {
     return {
-      isError: false,
-      files: "",
-      text: "",
+      input_text: "",
+      responed_data: [],
       isLoading: false,
-      response_data: [],
+      isError: false,
     };
   },
+  mounted(){
+    this.get_database()
+  },
   methods: {
-    submitFiles() {
-      this.isLoading = true;
+    get_database() {
       this.isError = false;
-      let formData = new FormData();
-      for (var i = 0; i < this.files.length; i++) {
-        let file = this.files[i];
-        formData.append("file", file);
-      }
+      this.isLoading = true;
       axios
-        .post(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
+        .get(
+          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_db`
+          
         )
         .then(
           (response) => (
-            console.log("SUCCESS!"),
-            console.log(response.data.result),
-            this.response_data = response.data.result,
-            this.isLoading = false
+            (this.responed_data = response.data),
+            console.log(this.responed_data),
+            (this.isLoading = false)
           )
         )
         .catch((response) => ((this.isLoading = false), (this.isError = true)));
-    },
-    handleFilesUpload() {
-      this.files = this.$refs.files.files;
     },
   },
 };

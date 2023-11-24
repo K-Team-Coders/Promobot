@@ -3,6 +3,12 @@
     <Header></Header>
     <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-48 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-6">
       <div class="z-20">
+        <Database :org_list="this.org_list"/>
+      </div>
+      <div class="z-20">
+        <WarningTable :org_list="this.org_list"/>
+      </div>
+      <div class="z-20">
         <RewiewForm :org_list="this.org_list"/>
       </div>
       <div class="pt-24">
@@ -28,12 +34,13 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import Database from "@/components/Database.vue"
 import FormsFile from "@/components/FormsFile.vue";
-
+import WarningTable from "@/components/WarningTable.vue";
 import axios from "axios";
 import RewiewForm from "@/components/RewiewForm.vue";
 export default {
-  components: { Header, Footer, FormsFile, RewiewForm },
+  components: { Header, Footer, FormsFile, RewiewForm, Database, WarningTable },
   data() {
     return {
       org_list: []
