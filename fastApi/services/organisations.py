@@ -1,4 +1,5 @@
 import sys
+import ast
 import shutil
 from pathlib import Path
 from datetime import datetime
@@ -32,3 +33,25 @@ def getTotalOrganisations():
             "organisations": unique,
             }
         )
+
+@router.get('/total_db')
+def getTotalDB():
+    """
+    Функция для выписки всей собранной БД
+    """
+
+    result = []
+
+    query = current_session.query(MessagesModel).all()
+    for part in query:
+        result.append({
+            "message": part.message,
+            "organisation": part.organisation,
+            "theme": part.theme,
+            "group": part.group,
+            "date": part.date,
+            "ner": ast.literal_eval(part.ner),
+            "coords": ast.literal_eval(part.coords)
+        })
+
+    return result
