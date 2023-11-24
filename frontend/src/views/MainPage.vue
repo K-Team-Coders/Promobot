@@ -3,7 +3,7 @@
     <Header></Header>
     <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-48 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-6">
       <div class="z-20">
-        <RewiewForm />
+        <RewiewForm :org_list="this.org_list"/>
       </div>
       <div class="pt-24">
         <div class="w-full bg-gray-200 rounded-full h-1">
@@ -17,7 +17,7 @@
           Выберите файл для анализа
         </div>
         <div class="pt-4">
-          <FormsFile></FormsFile>
+          <FormsFile :org_list="org_list"></FormsFile>
         </div>
       </div>
       <div class="sm:px-24 px-8 py-12">
@@ -39,16 +39,16 @@ export default {
   components: { Header, Footer, FormsFile, QuestionBlog, RewiewForm },
   data() {
     return {
-      question_list: [],
+      org_list: []
     };
   },
   mounted() {
     axios
-      .get(`http://${process.env.VUE_APP_USER_IP_WITH_PORT}/tableslist/`)
+      .get(`http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_organisations`)
       .then(
         (response) => (
-          (this.question_list = response.data.result),
-          console.log(response.data.result)
+          (this.org_list = response.data.organisations),
+          console.log(this.org_list)
         )
       );
   },

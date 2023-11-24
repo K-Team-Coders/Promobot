@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div class="bg-gray-50 w-full px-4 py-4 border-[1.5px] shadow-md rounded-lg">
     <form action="">
       <div class="flex justify-start">
@@ -11,7 +12,7 @@
           type="file"
         />
         <p class="mt-2.5 ml-2 text-sm text-gray-500" id="file_input_help">
-          .json
+          .csv
         </p>
       </div>
       <div class="flex justify-end pt-2">
@@ -107,58 +108,7 @@
               >
                 <option selected>Выберите исполнителя</option>
                 <div>Поиск</div>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
-                <option value="1">ООО "Спаси и сохрани"</option>
-                <option value="2">ОАО "Никто и не мы"</option>
-                <option value="3">ИП "Готов на все за деньги"</option>
-                <option value="4">АО "Гыг"</option>
+                <option v-for="(org, index) in org_list" :key="index" :value="index">{{org}}</option>
               </select>
             </td>
           </tr>
@@ -166,14 +116,17 @@
       </table>
     </div>
   </div>
+</div>
 </template>
+
 <script>
 import axios from "axios";
-import LoadingPage from "./LoadingPage.vue";
+
 
 export default {
-  components: {
-    LoadingPage,
+
+  props: {
+    org_list: Array
   },
   data() {
     return {
@@ -195,9 +148,8 @@ export default {
         let file = this.files[i];
         formData.append("file", file);
       }
-      console.log(this.IP);
       axios
-        .post(`http://${this.IP}/files/`, formData, {
+        .post(`https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
@@ -208,9 +160,6 @@ export default {
         })
         .catch(function (response) {
           console.log("FAILURE!!");
-          if (response.statusCode == 400) {
-            alert("Такой файл уже был загружен! Загрузите другой.");
-          }
         })
         .finally(function () {
           is_Loading = false;
