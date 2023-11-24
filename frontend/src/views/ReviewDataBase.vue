@@ -10,10 +10,9 @@
       <div class="z-20">
         <WarningTable :org_list="this.org_list" />
       </div>
-      <div class=" flex">
-        <div class="bg-red-500"><BarChart /></div>
-        <div class="bg-green-500"><BarChart /></div>
-        <RadarChart />
+      <div class="flex justify-left gap-4 pt-8">
+        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart /></div>
+        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart /></div>
       </div>
     </div>
     <Footer></Footer>
