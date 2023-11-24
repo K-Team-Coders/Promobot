@@ -12,3 +12,4 @@ class MessagesModel(bbase):
     group = Column(Text)
     date = Column(DateTime)
     ner = Column(Text)
+    coords = Column(Text)
