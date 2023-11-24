@@ -25,13 +25,13 @@
       </div>
     </form>
   </div>
-  <div class="rounded-lg pt-1">
+  <div class="rounded-lg pt-4">
     <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Результат</p>
     <div
       class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
     >
       <table
-        class="w-full text-xs text-gray-500 table-auto 2xl:table-fixed text-center"
+        class="w-full text-sm text-gray-500 table-auto 2xl:table-fixed text-center"
       >
         <thead class="text-xs text-gray-700 bg-gray-50 font-bold">
           <tr class="">
@@ -43,7 +43,13 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-64 cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
+            >
+              Дата
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 2xl:w-48 cursor-pointer hover:text-blue-600"
             >
               Группа тем
             </th>
@@ -55,13 +61,19 @@
             </th>
             <th
               scope="col"
-              class="px-6 py-3 cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-64 cursor-pointer hover:text-blue-600"
+            >
+              Локация
+            </th>
+            <th
+              scope="col"
+              class="px-6 py-3 2xl:w-72 cursor-pointer hover:text-blue-600"
             >
               Текст инцедента
             </th>
             <th
               scope="col"
-              class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
+              class="px-6 py-3 2xl:w-60 cursor-pointer hover:text-blue-600"
             >
               Исполнитель
             </th>
@@ -78,20 +90,77 @@
             >
               1
             </th>
-            <td class="px-6 py-4">Животные, асфальт, город</td>
+            <td class="px-6 py-4">2023-11-24</td>
+            <td class="px-6 py-4 text-center">group</td>
             <td class="px-6 py-4 text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
-              autem possimus quae, atque nostrum nesciunt eos assumenda corrupti
-              veritatis aliquid voluptate perferendis? Debitis accusantium saepe
-              excepturi. Ea cupiditate a provident.
+              Нарушение правил очистки дорог от снега и наледи/Обращения о
+              необходимости очистить тратуар от снега и наледи
             </td>
-            <td class="px-6 py- text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-              eius impedit repudiandae enim tenetur commodi error dolorum
-              nostrum dolore? Tenetur similique maxime placeat repudiandae
-              consequatur quis voluptates officiis dignissimos aspernatur.
+            <td class="px-6 py-4">
+              Россия, г.Санкт-Петербург, ул.Красного петуха, д.6, к.3, кв.124
             </td>
-            <td class="px-6 py-4">ООО СПАСИ И СОХРАНИ</td>
+            <td class="px-6 py-4 text-center">На улице не убран снег</td>
+            <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
+              <select
+                id="companyFile"
+                class="bg-gray-50 border border-gray-300 cursor-pointer text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              >
+                <option selected>Выберите исполнителя</option>
+                <div>Поиск</div>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+                <option value="1">ООО "Спаси и сохрани"</option>
+                <option value="2">ОАО "Никто и не мы"</option>
+                <option value="3">ИП "Готов на все за деньги"</option>
+                <option value="4">АО "Гыг"</option>
+              </select>
+            </td>
           </tr>
         </tbody>
       </table>
