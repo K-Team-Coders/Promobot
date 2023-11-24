@@ -1,7 +1,7 @@
 <template>
   <body class="">
     <Header></Header>
-    <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-56 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-48">
+    <div class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-48 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-6">
       <div class="z-20">
         <RewiewForm />
       </div>
