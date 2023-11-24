@@ -94,25 +94,24 @@
         </thead>
         <tbody class="font-semibold">
           <tr
-            v-for="i in response_data"
+            v-for="(el, index) in response_data" :key="index"
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
           >
             <th
               scope="row"
               class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
             >
-              1
+              {{ index + 1 }}
             </th>
-            <td class="px-6 py-4">2023-11-24</td>
-            <td class="px-6 py-4 text-center">group</td>
+            <td class="px-6 py-4">{{el.date}}</td>
+            <td class="px-6 py-4 text-center">{{el.group}}</td>
             <td class="px-6 py-4 text-justify">
-              Нарушение правил очистки дорог от снега и наледи/Обращения о
-              необходимости очистить тратуар от снега и наледи
+              {{el.theme}}
             </td>
             <td class="px-6 py-4">
-              Россия, г.Санкт-Петербург, ул.Красного петуха, д.6, к.3, кв.124
+              {{el.loc}}
             </td>
-            <td class="px-6 py-4 text-center">На улице не убран снег</td>
+            <td class="px-6 py-4 text-center">{{el.text}}</td>
             <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
               <select
                 id="companyFile"
@@ -164,13 +163,13 @@ export default {
             "Content-Type": "multipart/form-data",
           },
         })
-        .then(function (response) {
-          console.log("SUCCESS!!");
-          this.isLoading = false
-          this.response_data = response.data
+        .then(response => (
+          console.log("SUCCESS!!"),
+          this.isLoading = false,
+          this.response_data = response.data.result,
           console.log(response.data)
           
-        })
+        ))
         .catch(function (response) {
           console.log("FAILURE!!");
           this.isLoading = false
