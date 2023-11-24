@@ -1,7 +1,7 @@
 <template>
     <div>
       <div
-        class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
+        class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-1/2 pt-12 sm:text-7xl text-5xl"
       >
         Сообщения за последние 5 часов
       </div>
@@ -37,55 +37,55 @@
           class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
         >
           <table
-            class="w-full text-sm text-gray-500 table-auto 2xl:table-fixed text-center"
+            class="w-full text-sm text-gray-500 table-auto text-center"
           >
             <thead class="text-xs text-gray-700 bg-gray-50 font-bold">
               <tr class="">
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-1/12 cursor-pointer hover:text-blue-600"
                 >
                   ID
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-1/12 cursor-pointer hover:text-blue-600"
                 >
                   Дата
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-48 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-1/12 cursor-pointer hover:text-blue-600"
                 >
                   Группа тем
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-40 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-1/12 cursor-pointer hover:text-blue-600"
                 >
                   Тема
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-1/12 cursor-pointer hover:text-blue-600"
                 >
                   Локация
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-3/12 cursor-pointer hover:text-blue-600"
                 >
                   Текст инцедента
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-60 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-2/12 cursor-pointer hover:text-blue-600"
                 >
                   Исполнитель
                 </th>
                 <th
                   scope="col"
-                  class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
+                  class="px-6 py-3 2xl:w-2/12 cursor-pointer hover:text-blue-600"
                 >
                   Местоположение
                 </th>
@@ -98,21 +98,21 @@
               >
                 <th
                   scope="row"
-                  class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
+                  class="px-2 py-2 font-medium text-gray-900 whitespace-nowrap truncate"
                 >
                   {{index + 1}}
                 </th>
-                <td class="px-6 py-4">{{el.date}}</td>
+                <td class="px-6 py-4 text-center">{{el.date}}</td>
                 <td class="px-6 py-4 text-center">{{ el.group }}</td>
-                <td class="px-6 py-4 text-justify">
+                <td class="px-6 py-4 text-center">
                   {{el.theme}}
                 </td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4 text-center">
                   <ul> 
                     <li v-for="loc in el.loc" :key="loc">{{ loc }} </li>
                   </ul>
                 </td>
-                <td class="px-6 py-4 text-center">{{ el.message }}</td>
+                <td class="px-6 py-4 text-justify">{{ el.message }}</td>
                 <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
                   <select
                     id="companyFile"
