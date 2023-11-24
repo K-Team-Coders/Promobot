@@ -98,6 +98,12 @@
               >
                 Исполнитель
               </th>
+              <th
+                scope="col"
+                class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
+              >
+                Местоположение
+              </th>
             </tr>
           </thead>
           <tbody class="font-semibold">
@@ -112,7 +118,9 @@
                 {{ responed_data.theme }}
               </td>
               <td class="px-6 py-4 hover:text-blue-600 text-center">
-                {{ responed_data.ner }}
+                <ul>
+                  <li v-for="loc in responed_data.loc" :key="loc">{{ loc }}</li>
+                </ul>
               </td>
               <td class="px-6 py-4 text-justify hover:text-blue-600">
                 {{ responed_data.message }}
@@ -133,6 +141,9 @@
                   </option>
                 </select>
               </td>
+              <td class="px-6 py-4 text-justify hover:text-blue-600">
+                <Map :text="responed_data.message" :theme="responed_data.theme" :loc_list="responed_data.coords"></Map>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -143,7 +154,9 @@
 
 <script>
 import axios from "axios";
+import Map from "@/components/Map.vue"
 export default {
+  components: {Map},
   props: {
     org_list: Array,
   },
@@ -161,7 +174,7 @@ export default {
       this.isLoading = true;
       axios
         .post(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`,
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`,
           { message: this.input_text }
         )
         .then(
