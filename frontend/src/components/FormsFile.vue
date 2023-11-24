@@ -28,7 +28,7 @@
         </div>
       </form>
     </div>
-    <div v-if="isLoading" role="status" class="flex justify-center pt-20">
+    <div v-if="isLoading" role="status" class="flex justify-center py-20">
       <svg
         aria-hidden="true"
         class="inline w-20 h-20 text-gray-200 animate-spin fill-blue-600"
