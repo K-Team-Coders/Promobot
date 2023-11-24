@@ -10,6 +10,11 @@
       <div class="z-20">
         <WarningTable :org_list="this.org_list" />
       </div>
+      <div class=" flex">
+        <div class="bg-red-500"><BarChart /></div>
+        <div class="bg-green-500"><BarChart /></div>
+        <RadarChart />
+      </div>
     </div>
     <Footer></Footer>
   </body>
@@ -22,8 +27,19 @@ import FormsFile from "@/components/FormsFile.vue";
 import WarningTable from "@/components/WarningTable.vue";
 import axios from "axios";
 import RewiewForm from "@/components/RewiewForm.vue";
+import BarChart from "@/components/charts/BarChart.vue";
+import RadarChart from "@/components/charts/RadarChart.vue";
 export default {
-  components: { Header, Footer, FormsFile, RewiewForm, Database, WarningTable },
+  components: {
+    Header,
+    Footer,
+    FormsFile,
+    RewiewForm,
+    Database,
+    WarningTable,
+    BarChart,
+    RadarChart,
+  },
   data() {
     return {
       org_list: [],
