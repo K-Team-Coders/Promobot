@@ -5,6 +5,7 @@ from loguru import logger
 from geopy.geocoders import Nominatim
 
 import nltk
+nltk.download("stopwords")
 from nltk.corpus import stopwords
 from pymystem3 import Mystem
 from string import punctuation
@@ -12,7 +13,6 @@ from string import punctuation
 mystem = Mystem() 
 russian_stopwords = stopwords.words("russian")
 
-nltk.download("stopwords")
 sys.path.append(Path(__file__).parent.parent.joinpath('models').__str__())
 
 from models.model_pavlov_all_data.model import pavlov_all
