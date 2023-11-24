@@ -31,18 +31,20 @@ def addNewMessageAllPavlov(item: Message):
 
     # Обрабатываем поля
     theme = themeExtraction(message)
-    ner = ''
-    for x in nerExtraction(message):
-        ner += str(x) + ";;;"
+    ner = nerExtraction(message)
+    loc = locExtraction(ner)
     group = groupExtraction(message)
     date = datetime.now()
     organisation = organisationExtraction(message)
+    coords = coordsExtraction(loc)
 
     # Логгируем
     logger.debug(f"Тема сообщения -- {theme}")
     logger.debug(f"Сущности (закодированные) -- {ner}")
     logger.debug(f"Группы -- {group}")
+    logger.debug(f"Локации -- {loc}")
     logger.debug(f"Время -- {date}")
+    logger.debug(f"Координаты -- {coords}")
     logger.debug(f"Организация -- {organisation}")
 
     # Добавляем в БД
@@ -52,7 +54,7 @@ def addNewMessageAllPavlov(item: Message):
         theme = theme,
         group = group,
         date = date,
-        ner = ner
+        ner = ner.__str__()
         )
     )
     current_session.commit()
@@ -65,6 +67,8 @@ def addNewMessageAllPavlov(item: Message):
             "group": group,
             "theme": theme,
             "date": date.__str__(),
-            "ner": ner.split(';;;'),
+            "ner": ner,
+            "loc": loc,
+            "coords": coords
             }
         )

@@ -36,31 +36,26 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
 
     start = datetime.now()
 
-    texts = []
-    themes = []
-    ners = []
-    groups = []
-    dates = []
-    organisations = []
+    result = []
+
     for text in data["Текст инцидента"]:
-        ners.append(nerExtraction(text))
-        organisations.append(organisationExtraction(text))
-        themes.append(themeExtraction(text))
-        groups.append(groupExtraction(text))
-        texts.append(text)
-        dates.append(datetime.now().__str__())
+        result.append({
+            "ner": nerExtraction(text),
+            "organisation": organisationExtraction(text),
+            "loc": locExtraction(nerExtraction(text)),
+            "coords": coordsExtraction(locExtraction(nerExtraction(text))),
+            "theme": themeExtraction(text),
+            "group": groupExtraction(text),
+            "text": text,
+            "date": datetime.now().__str__()
+        })
 
     end = datetime.now()
     logger.debug(f'Calculating: {end - start}')
 
     return JSONResponse(
-        status_code=201, 
+        status_code=200, 
         content = {
-            "organisations": organisations,
-            "texts": texts,
-            "groups": groups,
-            "themes": themes,
-            "dates": dates,
-            "ners": ners,
-            }
+            "result": result,
+            }        
         )
