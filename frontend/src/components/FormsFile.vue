@@ -28,10 +28,10 @@
         </div>
       </form>
     </div>
-    <div v-if="isLoading" role="status">
+    <div v-if="isLoading" role="status" class="flex justify-center pt-20">
       <svg
         aria-hidden="true"
-        class="inline w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
+        class="inline w-20 h-20 text-gray-200 animate-spin fill-blue-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -49,7 +49,7 @@
     </div>
     <div
       v-else-if="isError"
-      class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-xl xl:text-xl lg:text-xl md:text-xl w-20 pt-12 sm:text-xl text-xl"
+      class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-xl xl:text-xl lg:text-xl md:text-xl w-96 pt-12 sm:text-xl text-xl"
     >
       Ошибка. Попробуйте еще раз
     </div>
