@@ -20,9 +20,6 @@
           <FormsFile :org_list="org_list"></FormsFile>
         </div>
       </div>
-      <div class="sm:px-24 px-8 py-12">
-        <QuestionBlog :question_list="question_list"></QuestionBlog>
-      </div>
     </div>
     <Footer></Footer>
   </body>
@@ -32,11 +29,11 @@
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
 import FormsFile from "@/components/FormsFile.vue";
-import QuestionBlog from "@/components/QuestionBlog.vue";
+
 import axios from "axios";
 import RewiewForm from "@/components/RewiewForm.vue";
 export default {
-  components: { Header, Footer, FormsFile, QuestionBlog, RewiewForm },
+  components: { Header, Footer, FormsFile, RewiewForm },
   data() {
     return {
       org_list: []

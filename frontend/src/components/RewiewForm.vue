@@ -98,7 +98,7 @@
               {{responed_data.theme}}
             </td>
             <td class="px-6 py-4 hover:text-blue-600">
-              Россия, г.Санкт-Петербург, ул.Красного петуха, д.6, к.3, кв.124
+              {{responed_data.ner}}
             </td>
             <td class="px-6 py-4 text-center hover:text-blue-600">  {{responed_data.message}}</td>
             <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
