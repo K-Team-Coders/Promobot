@@ -8,11 +8,17 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
 sys.path.append(Path(__file__).parent.parent.joinpath('database').__str__())
-from database.models import MessagesModel
+sys.path.append(Path(__file__).parent.parent.joinpath('models').__str__())
+
+logger.debug(sys.path)
+
+from database.dbmodels import MessagesModel
 from database.sqlalchemy import current_session
 
+from models.model_pavlov_all_data.model import pavlov_all
+
 def themeExtraction(text):
-    return 'theme'
+    return pavlov_all.predict(text)
 
 def nerExtraction(text):
     return ['ner1', 'ner2', 'ner3']

@@ -1,4 +1,5 @@
-from loguru import logger
+from pathlib import Path
+
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -11,6 +12,7 @@ app = FastAPI()
 
 bbase.metadata.create_all(engine, checkfirst=True)
 
+# Inputs routers
 app.include_router(
     message.router, 
     prefix="/api",
