@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div
     class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
   >
@@ -8,6 +9,7 @@
     <form class="w-full">
       <div class="pt-4">
         <input
+          v-model="input_text"
           autofocus
           type="text"
           id="large-input"
@@ -17,6 +19,7 @@
       <div class="flex justify-end pt-2">
         <button
           type="submit"
+          @click="submit_text()"
           class="text-white border-[1px] 2xl:text-lg hover:bg-blue-900 hover:border-blue-900 hover:border-[1px] duration-150 focus:ring-4 focus:outline-none focus:ring-blue-700 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-2"
         >
           Отправить отзыв
@@ -35,12 +38,6 @@
       >
         <thead class="text-xs text-gray-700 bg-gray-50 font-bold">
           <tr class="">
-            <th
-              scope="col"
-              class="px-1 py-3 2xl:w-10 cursor-pointer hover:text-blue-600"
-            >
-              ID
-            </th>
             <th
               scope="col"
               class="px-6 py-3 2xl:w-64 cursor-pointer hover:text-blue-600"
@@ -71,29 +68,46 @@
           <tr
             class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
           >
-            <th
-              scope="row"
-              class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
-            >
-              1
-            </th>
-            <td class="px-6 py-4">Животные, асфальт, город</td>
+           
+            <td class="px-6 py-4">{{ responed_data.group }}</td>
             <td class="px-6 py-4 text-justify">
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Officiis
-              autem possimus quae, atque nostrum nesciunt eos assumenda corrupti
-              veritatis aliquid voluptate perferendis? Debitis accusantium saepe
-              excepturi. Ea cupiditate a provident.
+              {{responed_data.theme}}
             </td>
             <td class="px-6 py- text-justify">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Earum
-              eius impedit repudiandae enim tenetur commodi error dolorum
-              nostrum dolore? Tenetur similique maxime placeat repudiandae
-              consequatur quis voluptates officiis dignissimos aspernatur.
+              {{responed_data.message}}
             </td>
-            <td class="px-6 py-4">ООО СПАСИ И СОХРАНИ</td>
+            <td class="px-6 py-4">{{responed_data.organisation}}</td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+</div>
 </template>
+ 
+<script>
+import axios from "axios";
+export default {
+
+  data() {
+    return {
+      input_text: '',
+      responed_data: [],
+      isLoading : false
+    }
+  },
+  methods: {
+    submit_text(){
+      this.isLoading = true
+    axios
+        .post(
+          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`, {message: this.input_text})
+          .then(response => (
+          this.responed_data = response.data,
+          console.log(this.responed_data))),
+          this.isLoading = false
+   }
+  }
+
+}
+</script>
