@@ -46,6 +46,7 @@ def addNewMessageAllPavlov(item: Message):
     logger.debug(f"Время -- {date}")
     logger.debug(f"Координаты -- {coords}")
     logger.debug(f"Организация -- {organisation}")
+    logger.debug(f"Обработанный текст -- {message}")
 
     # Добавляем в БД
     current_session.add(MessagesModel(
@@ -63,7 +64,7 @@ def addNewMessageAllPavlov(item: Message):
         status_code=201, 
         content = {
             "organisation": organisation,
-            "message": message,
+            "message": item.message,
             "group": group,
             "theme": theme,
             "date": date.__str__(),
