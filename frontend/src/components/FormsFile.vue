@@ -109,7 +109,10 @@
               {{el.theme}}
             </td>
             <td class="px-6 py-4">
-              {{el.loc}}
+              <ul>
+             <li v-for="(loc, index) in el.loc" :key="index">{{loc}}</li>
+            </ul>
+              
             </td>
             <td class="px-6 py-4 text-center">{{el.text}}</td>
             <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
