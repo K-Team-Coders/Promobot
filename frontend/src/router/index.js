@@ -9,18 +9,11 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/MainPage.vue"),
   },
   {
-    path: "/answer",
-    name: "answer",
+    path: "/database",
+    name: "database",
 
     component: () =>
-      import("../views/TablePage.vue"),
-  },
-  {
-    path: "/answer/:id",
-    name: "DetailTable",
-    component: () =>
-    import("../views/TablePage.vue"),
-    props: true
+      import("../views/ReviewDataBase.vue"),
   },
   {
     path: "/notfound",
