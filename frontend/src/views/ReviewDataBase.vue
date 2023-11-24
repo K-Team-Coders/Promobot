@@ -5,10 +5,10 @@
       class="bg-gradient-to-r from-blue-800 to-blue-600 2xl:px-48 xl:px-44 lg:px-32 md:px-24 sm:px-16 px-6"
     >
       <div class="z-20">
-        <Database :org_list="this.org_list" />
+        <Database :db_list=" database" />
       </div>
       <div class="z-20">
-        <WarningTable :org_list="this.org_list" />
+        <WarningTable :act_list="warnings" />
       </div>
       <div class="flex justify-left gap-4 pt-8">
         <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart /></div>
@@ -41,20 +41,49 @@ export default {
   },
   data() {
     return {
-      org_list: [],
+      database: [],
+      warnings: []
     };
   },
-  mounted() {
-    axios
-      .get(
-        `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_organisations`
-      )
-      .then(
-        (response) => (
-          (this.org_list = response.data.organisations),
-          console.log(this.org_list)
+  methods:{
+    get_database() {
+      this.isError = false;
+      this.isLoading = true;
+      axios
+        .get(
+          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_db`
+          
         )
-      );
+        .then(
+          (response) => (
+            (this.database = response.data),
+            console.log(this.responed_data),
+            (this.isLoading = false)
+          )
+        )
+        .catch((response) => ((this.isLoading = false), (this.isError = true)));
+    },
+    get_actual() {
+        this.isError = false;
+        this.isLoading = true;
+        axios
+          .get(
+            `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/extra_issues`
+            
+          )
+          .then(
+            (response) => (
+              (this.warnings = response.data),
+              console.log(response.data),
+              (this.isLoading = false)
+            )
+          )
+          .catch((response) => ((this.isLoading = false), (this.isError = true)));
+      },
   },
+  mounted() {
+    this.get_actual()
+    this.get_database()
+  }
 };
 </script>

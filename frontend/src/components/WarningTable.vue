@@ -93,7 +93,7 @@
             </thead>
             <tbody class="font-semibold">
               <tr
-                v-for="(el, index) in responed_data.actual" :key="index"
+                v-for="(el, index) in act_list.actual" :key="index"
                 class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
               >
                 <th
@@ -146,7 +146,7 @@
   export default {
     components: {Map},
     props: {
-      org_list: Array,
+      act_list: Array,
     },
     data() {
       return {
@@ -155,28 +155,6 @@
         isLoading: false,
         isError: false,
       };
-    },
-    mounted(){
-      this.get_database()
-    },
-    methods: {
-      get_database() {
-        this.isError = false;
-        this.isLoading = true;
-        axios
-          .get(
-            `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/extra_issues`
-            
-          )
-          .then(
-            (response) => (
-              (this.responed_data = response.data),
-              console.log(response.data),
-              (this.isLoading = false)
-            )
-          )
-          .catch((response) => ((this.isLoading = false), (this.isError = true)));
-      },
     },
   };
   </script>

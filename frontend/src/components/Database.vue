@@ -93,7 +93,7 @@
           </thead>
           <tbody class="font-semibold">
             <tr
-              v-for="(el, index) in responed_data" :key="index"
+              v-for="(el, index) in db_list" :key="index"
               class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
             >
               <th
@@ -146,7 +146,7 @@ import Map from "@/components/Map.vue"
 export default {
   components: {Map},
   props: {
-    org_list: Array,
+    db_list: Array,
   },
   data() {
     return {
@@ -156,27 +156,6 @@ export default {
       isError: false,
     };
   },
-  mounted(){
-    this.get_database()
-  },
-  methods: {
-    get_database() {
-      this.isError = false;
-      this.isLoading = true;
-      axios
-        .get(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_db`
-          
-        )
-        .then(
-          (response) => (
-            (this.responed_data = response.data),
-            console.log(this.responed_data),
-            (this.isLoading = false)
-          )
-        )
-        .catch((response) => ((this.isLoading = false), (this.isError = true)));
-    },
-  },
+ 
 };
 </script>
