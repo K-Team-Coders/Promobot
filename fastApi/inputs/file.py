@@ -24,7 +24,7 @@ router = APIRouter()
 @router.post('/add_file_all_pavlov')
 def addNewFileAllPavlov(file: UploadFile = File(...)):
     """
-    Основная функция по добавлению файла в формате csv    
+    Основная функция по добавлению файла в формате csv и выводе его в xlsx    
     с помощью модели all_pavlov
     """
 
@@ -97,18 +97,24 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
     logger.warning(total_texts[0][0])
 
     dataframe = pd.DataFrame(data= {
-            "Тексты" : [x[0].replace("'", "") for x in total_texts], 
+            "Тексты" : [x[0].replace("'", "").replace(',', ' ') for x in total_texts], 
             "Темы" : [x[0] for x in total_themes], 
             "Группы тем" : [x[0] for x in total_group], 
             "Исполнители" : [x[0] for x in  total_organisations], 
-            "NER" : [x for x in total_ner]
-        })    
-    dataframe.to_csv('data_result.csv', encoding='utf-8', sep=';')
+            "NER" : [x.replace(',', ' ') for x in total_ner]
+        })  
+          
+    # dataframe.to_excel('data_result.xlsx', engine="openpyxl", index=False)
+    # return FileResponse(
+    #     filename="data_result.xlsx", 
+    #     path='data_result.xlsx' 
+    #     )
+    dataframe.to_csv('data_result.csv', encoding="utf-8", sep=';')
 
     end = datetime.now()
     logger.debug(f'Calculating: {end - start}')
 
     return FileResponse(
-        filename="predict.csv", 
+        filename="data_result.csv", 
         path='data_result.csv' 
         )
