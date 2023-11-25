@@ -161,7 +161,7 @@ export default {
       this.isLoading = true;
       axios
         .post(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`,
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`,
           { message: this.input_text }
         )
         .then(
