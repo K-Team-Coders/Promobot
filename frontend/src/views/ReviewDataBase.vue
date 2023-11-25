@@ -51,7 +51,7 @@ export default {
       this.isLoading = true;
       axios
         .get(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_db`
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/total_db`
           
         )
         .then(
@@ -68,7 +68,7 @@ export default {
         this.isLoading = true;
         axios
           .get(
-            `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/extra_issues`
+            `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/extra_issues`
             
           )
           .then(
