@@ -3,7 +3,7 @@
     <div
       class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
     >
-      Введите отзыв
+      Введите текст
     </div>
     <div>
       <form class="w-full">
@@ -126,20 +126,7 @@
                 {{ responed_data.message }}
               </td>
               <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
-                <select
-                  id="company"
-                  class="bg-gray-50 border border-gray-300 cursor-pointer text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                >
-                  <option selected>Выберите исполнителя</option>
-                  <div>Поиск</div>
-                  <option
-                    v-for="(org, index) in org_list"
-                    :key="index"
-                    :value="index"
-                  >
-                    {{ org }}
-                  </option>
-                </select>
+                {{ responed_data.organisation }}
               </td>
               <td class="px-6 py-4 text-justify hover:text-blue-600">
                 <Map :text="responed_data.message" :theme="responed_data.theme" :loc_list="responed_data.coords"></Map>

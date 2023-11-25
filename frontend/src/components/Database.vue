@@ -109,25 +109,12 @@
               </td>
               <td class="px-6 py-4">
                 <ul> 
-                  <li v-for="loc in el.loc" :key="loc">{{ loc }} </li>
+                  <li v-for="one_loc in el.loc" :key="one_loc">{{ one_loc }} </li>
                 </ul>
               </td>
               <td class="px-6 py-4 text-justify">{{ el.message }}</td>
               <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
-                <select
-                  id="companyFile"
-                  class="bg-gray-50 border border-gray-300 cursor-pointer text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                >
-                  <option selected>Выберите исполнителя</option>
-                  <div>Поиск</div>
-                  <option
-                    v-for="(org, index) in org_list"
-                    :key="index"
-                    :value="index"
-                  >
-                    {{ org }}
-                  </option>
-                </select>
+                {{ el.organisation }}
               </td>
               <td class="px-6 py-4 text-justify hover:text-blue-600">
                 <Map :loc_list="el.coords"></Map>

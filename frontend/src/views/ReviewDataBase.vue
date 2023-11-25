@@ -11,8 +11,8 @@
         <WarningTable :act_list="warnings" />
       </div>
       <div class="flex justify-left gap-4 pt-8">
-        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart /></div>
-        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart /></div>
+        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart :label_name="`Распределение групп тем`" :dataset="warnings.group_stats" /></div>
+        <div class="bg-whitesmoke w-1/3 rounded-lg"><BarChart :label_name="`Распределение тем`" :dataset="warnings.theme_stats"/></div>
       </div>
     </div>
     <Footer></Footer>
@@ -81,9 +81,11 @@ export default {
           .catch((response) => ((this.isLoading = false), (this.isError = true)));
       },
   },
-  mounted() {
+  created() {
     this.get_actual()
     this.get_database()
+    setTimeout(console.log("Ready!"), 1500)
+    
   }
 };
 </script>

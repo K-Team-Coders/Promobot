@@ -1,7 +1,7 @@
 <template>
     <div class="border-idealBlue border-[6px] rounded-lg shadow-cards">
       <yandex-map @map-was-initialized="handler" @click="changeMyPos" :coords="coords" :use-object-manager="true"
-        :object-manager-clusterize="true"   :settings="settings" :zoom="2" :cluster-options="clusterOptions">
+        :object-manager-clusterize="true"   :settings="settings" :zoom="3" :cluster-options="clusterOptions">
         <ymap-marker   v-for="(item, index) in loc_list" :key="index" :coords="[item[0], item[1]]"
           :markerId="item.id" :cluster-name="1"   />
             

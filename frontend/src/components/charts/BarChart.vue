@@ -26,6 +26,7 @@ ChartJS.register(
 export default {
   props: {
     dataset: Object,
+    label_name: String,
   },
   name: "BarChart",
   components: { Bar },
@@ -46,31 +47,18 @@ export default {
   //   this.chartData.datasets[1].data = neu_set
   //   this.chartData.datasets[2].data = neg_set
   // },
+  computed:{
+  },
   data() {
     return {
-      name_set: [],
-      pos_set: [],
-      neu_set: [],
-      neg_set: [],
       chartData: {
-        labels: [],
+        labels: Object.keys(this.dataset),
 
         datasets: [
-          {
-            label: "Положительных",
-            backgroundColor: "#00cf00",
-            data: [],
-          },
-          {
-            label: "Нейтральных",
-            backgroundColor: "#D0D0D0",
-            data: [],
-          },
-          {
-            label: "Негативных",
-            backgroundColor: "red",
-            data: [],
-          },
+       { data: Object.values(this.dataset),
+      label: this.label_name,
+      backgroundColor: '#f87979'
+     } 
         ],
       },
       chartOptions: {
