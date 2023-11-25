@@ -13,3 +13,4 @@ class MessagesModel(bbase):
     date = Column(DateTime)
     ner = Column(Text)
     coords = Column(Text)
+    loc = Column(Text)
