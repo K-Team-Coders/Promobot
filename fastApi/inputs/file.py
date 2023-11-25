@@ -13,6 +13,9 @@ sys.path.append(Path(__file__).parent.parent.joinpath('database').__str__())
 
 from .extractions import *
 
+from database.dbmodels import MessagesModel
+from database.sqlalchemy import current_session
+
 class Message(BaseModel):
     message: str
     
@@ -38,17 +41,66 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
 
     result = []
 
+    total_texts = []
+    total_ner = []
+    total_organisations = []
+    total_group = []
+    total_themes = []
+
+    # Собираем данные по колонке текста (и только текста!)
     for text in data["Текст инцидента"]:
+
+        # Обработка данных
+        ner = nerExtraction(text)
+        organisation = organisationExtraction(text),
+        loc = locExtraction(ner),
+        coords = coordsExtraction(loc),
+        theme = themeExtraction(text),
+        group = groupExtraction(text),
+        text = text,
+        date = datetime.now().__str__()
+
+        # Данные для возвращаемого файла
+        total_texts.append(text)
+        total_organisations.append(organisation)
+        total_ner.append(ner.__str__())
+        total_group.append(group)
+        total_themes.append(theme)
+
+        # Данные для БД
+        current_session.add(MessagesModel(
+            message = text,
+            organisation = organisation,
+            theme = theme,
+            group = group,
+            date = date,
+            ner = ner.__str__(),
+            coords = coords.__str__(),
+            loc = loc.__str__()
+            )
+        )
+        current_session.commit()
+
+        # Данные для ответа по REST
         result.append({
-            "ner": nerExtraction(text),
-            "organisation": organisationExtraction(text),
-            "loc": locExtraction(nerExtraction(text)),
-            "coords": coordsExtraction(locExtraction(nerExtraction(text))),
-            "theme": themeExtraction(text),
-            "group": groupExtraction(text),
+            "ner": ner,
+            "organisation": organisation,
+            "loc": loc,
+            "coords": coords,
+            "theme": theme,
+            "group": group,
             "text": text,
-            "date": datetime.now().__str__()
+            "date": date
         })
+
+    dataframe = pd.DataFrame(data= {
+            "Тексты" : total_texts, 
+            "Темы" : total_themes, 
+            "Группы тем" :total_group, 
+            "Исполнители" : total_organisations, 
+            "NER" : total_ner
+        })    
+    dataframe.to_csv('data_result.csv')
 
     end = datetime.now()
     logger.debug(f'Calculating: {end - start}')

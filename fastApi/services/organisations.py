@@ -52,7 +52,8 @@ def getTotalDB():
             "group": part.group,
             "date": part.date,
             "ner": ast.literal_eval(part.ner),
-            "coords": ast.literal_eval(part.coords)
+            "coords": ast.literal_eval(part.coords),
+            "loc": ast.literal_eval(part.loc)
         })
 
     return result
@@ -91,9 +92,10 @@ def getExtraIssues():
             "organisation": part.organisation,
             "theme": part.theme,
             "group": part.group,
-            "date": part.date,
+            "date": part.date.__str__(),
             "ner": ast.literal_eval(part.ner),
-            "coords": ast.literal_eval(part.coords)
+            "coords": ast.literal_eval(part.coords),
+            "loc": ast.literal_eval(part.loc)
         })
 
     return JSONResponse(status_code=200, content={
