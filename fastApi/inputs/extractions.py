@@ -108,8 +108,6 @@ def coordsExtraction(loc):
     Выборка координат если есть локации в НЕР
     """
 
-    loc = loc[0]
-
     logger.debug(loc)
     
     coords = []

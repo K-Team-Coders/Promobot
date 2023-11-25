@@ -53,7 +53,7 @@ def getTotalDB():
             "date": part.date,
             "ner": ast.literal_eval(part.ner),
             "coords": ast.literal_eval(part.coords),
-            "loc": ast.literal_eval(part.loc)
+            "loc": part.loc
         })
 
     return result
@@ -95,7 +95,7 @@ def getExtraIssues():
             "date": part.date.__str__(),
             "ner": ast.literal_eval(part.ner),
             "coords": ast.literal_eval(part.coords),
-            "loc": ast.literal_eval(part.loc)
+            "loc": part.loc
         })
 
     return JSONResponse(status_code=200, content={
