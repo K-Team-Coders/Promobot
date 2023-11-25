@@ -115,7 +115,7 @@ export default {
       }
       axios
         .post(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`,
+          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`,
           formData,
           {
             headers: {
