@@ -20,11 +20,25 @@ from models.model_group.model import pavlov_group_all
 from models.model_organisations.model import pavlov_organisations_all
 from models.ner.model import nner
 
+import pymorphy2
+morph = pymorphy2.MorphAnalyzer()
+
 geolocator = Nominatim(user_agent="promobot_k_team")
 
+def upcase_first_letter(s):
+    return s[0].upper() + s[1:]
+
+def lemmatize(text):
+    words = text.split() # разбиваем текст на слова
+    res = list()
+    for word in words:
+        p = morph.parse(word)[0]
+        res.append(upcase_first_letter(p.normal_form))
+
+    return res
+
+
 def preprocessText(text):
-    def upcase_first_letter(s):
-        return s[0].upper() + s[1:]
 
     text = re.sub(r"https?://\S+", "", text)
     text = " ".join([w for w in text.split() if w.isalpha()])
@@ -86,7 +100,7 @@ def locExtraction(ners):
     
         for ner in ners:
             if ner["named_entity"] == "LOC":
-                locs.append(preprocessText(ner["token"]))
+                locs.append(lemmatize(ner["token"]))
     return locs
 
 def coordsExtraction(loc):
@@ -94,6 +108,8 @@ def coordsExtraction(loc):
     Выборка координат если есть локации в НЕР
     """
     logger.debug(loc)
+
+    loc = loc[0]
 
     coords = []
 

@@ -100,7 +100,7 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
             "Исполнители" : total_organisations, 
             "NER" : total_ner
         })    
-    dataframe.to_csv('data_result.csv')
+    dataframe.to_csv('data_result.csv', encoding='utf-8', sep=';')
 
     end = datetime.now()
     logger.debug(f'Calculating: {end - start}')
