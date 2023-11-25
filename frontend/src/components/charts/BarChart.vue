@@ -63,7 +63,18 @@ export default {
       },
       chartOptions: {
         stacked: true,
+        maintainAspectRatio: false,
+        scales: {
+        x: {
+          ticks: {
+            autoSkip: true, // Отключает автоматическое пропускание labels
+            maxRotation: 0, // Поворот labels на 90 градусов (можно указать другое значение)
+            minRotation: 90, // Поворот labels на 90 градусов (можно указать другое значение)
+          },
+        },
       },
+      },
+      
     };
   },
 };
