@@ -141,3 +141,8 @@ FastAPI, VueJS, PostgreSQL, Docker (docker-compose), pavlov, nltk, sqlalchemy.
 4. Проработан концепт для самообучающийся системы (дообучение в процессе эксплуатации)
 
 ### Скриншоты веб-страниц
+
+![image](1_sc.png)
+![image](2_sc.png)
+![image](3_sc.png)  
+![image](4_sc.png) 
