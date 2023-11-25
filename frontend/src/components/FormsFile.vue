@@ -12,6 +12,7 @@
             id="files"
             ref="files"
             type="file"
+            accept=".csv"
           />
           <p class="mt-2.5 ml-2 text-sm text-gray-500" id="file_input_help">
             .csv
@@ -23,7 +24,7 @@
             type="submit"
             class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 duration-150 focus:outline-none focus:ring-blue-700 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-2"
           >
-            Отправить файл
+            Отправить файл. 
           </button>
         </div>
       </form>
@@ -54,7 +55,7 @@
       Ошибка. Попробуйте еще раз
     </div>
     <div v-else class="rounded-lg pt-4">
-      <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Результат</p>
+      <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Пример загружаемых данных в формате .csv</p>
       <div
         class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
       >
@@ -65,94 +66,18 @@
             <tr class="">
               <th
                 scope="col"
-                class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
-              >
-                ID
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
-              >
-                Дата
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-48 cursor-pointer hover:text-blue-600"
-              >
-                Группа тем
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-40 cursor-pointer hover:text-blue-600"
-              >
-                Тема
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
-              >
-                Локация
-              </th>
-              <th
-                scope="col"
                 class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
               >
-                Текст инцедента
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-60 cursor-pointer hover:text-blue-600"
-              >
-                Исполнитель
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
-              >
-                Местоположение
+                Текст инцидента
               </th>
             </tr>
           </thead>
           <tbody class="font-semibold">
             <tr
-              v-for="(el, index) in response_data" :key="index"
               class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
             >
-              <th
-                scope="row"
-                class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate"
-              >
-                {{index + 1}}
-              </th>
-              <td class="px-6 py-4">{{el.date}}</td>
-              <td class="px-6 py-4 text-center">{{ el.group }}</td>
-              <td class="px-6 py-4 text-justify">
-                {{el.theme}}
-              </td>
-              <td class="px-6 py-4">
-                <ul> 
-                  <li v-for="loc in el.loc" :key="loc">{{ loc }} </li>
-                </ul>
-              </td>
-              <td class="px-6 py-4 text-center">{{ el.text }}</td>
-              <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
-                <select
-                  id="companyFile"
-                  class="bg-gray-50 border border-gray-300 cursor-pointer text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                >
-                  <option selected>Выберите исполнителя</option>
-                  <div>Поиск</div>
-                  <option
-                    v-for="(org, index) in org_list"
-                    :key="index"
-                    :value="index"
-                  >
-                    {{ org }}
-                  </option>
-                </select>
-              </td>
               <td class="px-6 py-4 text-justify hover:text-blue-600">
-                <Map :loc_list="el.coords"></Map>
+                Сегодня в Перми появилась яма(
               </td>
             </tr>
           </tbody>
@@ -198,14 +123,17 @@ export default {
             },
           }
         )
-        .then(
-          (response) => (
-            console.log("SUCCESS!"),
-            console.log(response.data.result),
-            this.response_data = response.data.result,
-            this.isLoading = false
+        .then(response => {
+          this.isLoading = false;
+          const link = document.createElement('a');
+          link.href = window.URL.createObjectURL(new Blob([response.data]));
+          link.setAttribute(
+            'download',
+           `${new Date().getDate()}_dataset.csv`
           )
-        )
+          document.body.appendChild(link);
+          link.click()
+        })
         .catch((response) => ((this.isLoading = false), (this.isError = true)));
     },
     handleFilesUpload() {
