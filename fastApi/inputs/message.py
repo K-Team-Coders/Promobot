@@ -57,7 +57,7 @@ def addNewMessageAllPavlov(item: Message):
         date = date,
         ner = ner.__str__(),
         coords = coords.__str__(),
-        loc = loc.__str__()
+        loc = loc[0].__str__()
         )
     )
     current_session.commit()

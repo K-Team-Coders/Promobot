@@ -6,7 +6,7 @@ from datetime import datetime
 import pandas as pd
 from loguru import logger
 from fastapi import APIRouter, UploadFile, File
-from fastapi.responses import JSONResponse
+from fastapi.responses import JSONResponse, FileResponse
 from pydantic import BaseModel
 
 sys.path.append(Path(__file__).parent.parent.joinpath('database').__str__())
@@ -39,7 +39,7 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
 
     start = datetime.now()
 
-    result = []
+    # result = []
 
     total_texts = []
     total_ner = []
@@ -81,33 +81,34 @@ def addNewFileAllPavlov(file: UploadFile = File(...)):
         )
         current_session.commit()
 
-        # Данные для ответа по REST
-        result.append({
-            "ner": ner,
-            "organisation": organisation,
-            "loc": loc,
-            "coords": coords,
-            "theme": theme,
-            "group": group,
-            "text": text,
-            "date": date
-        })
+        # # Данные для ответа по REST
+        # result.append({
+        #     "ner": ner,
+        #     "organisation": organisation,
+        #     "loc": loc[0],
+        #     "coords": coords,
+        #     "theme": theme,
+        #     "group": group,
+        #     "text": text,
+        #     "date": date
+        # })
+
+    logger.warning(type(total_texts[0]))
+    logger.warning(total_texts[0][0])
 
     dataframe = pd.DataFrame(data= {
-            "Тексты" : total_texts, 
-            "Темы" : total_themes, 
-            "Группы тем" :total_group, 
-            "Исполнители" : total_organisations, 
-            "NER" : total_ner
+            "Тексты" : [x[0].replace("'", "") for x in total_texts], 
+            "Темы" : [x[0] for x in total_themes], 
+            "Группы тем" : [x[0] for x in total_group], 
+            "Исполнители" : [x[0] for x in  total_organisations], 
+            "NER" : [x for x in total_ner]
         })    
     dataframe.to_csv('data_result.csv', encoding='utf-8', sep=';')
 
     end = datetime.now()
     logger.debug(f'Calculating: {end - start}')
 
-    return JSONResponse(
-        status_code=200, 
-        content = {
-            "result": result,
-            }        
+    return FileResponse(
+        filename="predict.csv", 
+        path='data_result.csv' 
         )

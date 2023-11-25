@@ -100,17 +100,18 @@ def locExtraction(ners):
     
         for ner in ners:
             if ner["named_entity"] == "LOC":
-                locs.append(lemmatize(ner["token"]))
+                locs.append(lemmatize(ner["token"])[0])
     return locs
 
 def coordsExtraction(loc):
     """
     Выборка координат если есть локации в НЕР
     """
-    logger.debug(loc)
 
     loc = loc[0]
 
+    logger.debug(loc)
+    
     coords = []
 
     # Проверка багов
