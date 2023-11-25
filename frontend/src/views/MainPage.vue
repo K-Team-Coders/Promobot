@@ -28,12 +28,13 @@
 <script>
 import Header from "../components/Header.vue";
 import Footer from "../components/Footer.vue";
+import Database from "@/components/Database.vue"
 import FormsFile from "@/components/FormsFile.vue";
-
+import WarningTable from "@/components/WarningTable.vue";
 import axios from "axios";
 import RewiewForm from "@/components/RewiewForm.vue";
 export default {
-  components: { Header, Footer, FormsFile, RewiewForm },
+  components: { Header, Footer, FormsFile, RewiewForm, Database, WarningTable },
   data() {
     return {
       org_list: []

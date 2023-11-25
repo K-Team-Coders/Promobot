@@ -59,7 +59,7 @@
         class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
       >
         <table
-          class="w-full text-sm text-gray-500 table-auto 2xl:table-fixed text-center"
+          class="w-full text-sm text-gray-500 table-auto text-center"
         >
           <thead class="text-xs text-gray-700 bg-gray-50 font-bold">
             <tr class="">
@@ -190,7 +190,7 @@ export default {
       }
       axios
         .post(
-          `http://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`,
+          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_file_all_pavlov`,
           formData,
           {
             headers: {

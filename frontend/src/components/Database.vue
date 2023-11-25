@@ -1,32 +1,11 @@
 <template>
   <div>
     <div
-      class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-20 pt-12 sm:text-7xl text-5xl"
+      class="text-whitesmoke font-black z-[10] font-roboto 2xl:text-7xl xl:text-7xl lg:text-7xl md:text-7xl w-1/2 pt-12 sm:text-7xl text-5xl"
     >
-      Введите отзыв
+      База данных обращений
     </div>
-    <div>
-      <form class="w-full">
-        <div class="pt-4">
-          <input
-            v-model="input_text"
-            autofocus
-            type="text"
-            id="large-input"
-            class="block w-full p-4 text-gray-900 font-roboto font-medium rounded-lg bg-gray-50 sm:text-md focus:ring-blue-500 focus:border-blue-500"
-          />
-        </div>
-        <div class="flex justify-end pt-2">
-          <button
-            type="submit"
-            @click="submit_text()"
-            class="text-white border-[1px] 2xl:text-lg hover:bg-blue-900 hover:border-blue-900 hover:border-[1px] duration-150 focus:ring-4 focus:outline-none focus:ring-blue-700 font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-2"
-          >
-            Отправить отзыв
-          </button>
-        </div>
-      </form>
-    </div>
+    
     <div v-if="isLoading" role="status" class="flex justify-center pt-20">
       <svg
         aria-hidden="true"
@@ -52,10 +31,10 @@
     >
       Ошибка. Попробуйте еще раз
     </div>
-    <div v-else class="rounded-lg pt-1">
+    <div v-else class="rounded-lg pt-4">
       <p class="text-left pb-2 font-bold text-xl text-whitesmoke">Результат</p>
       <div
-        class="sm:rounded-lg rounded-lg overflow-auto h-full xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
+        class="sm:rounded-lg rounded-lg overflow-auto h-[500px] xl:max-w-[1800px] lg:max-w-4xl md:max-w-3xl sm:max-w-2xl mx-auto max-w-[300px]"
       >
         <table
           class="w-full text-sm text-gray-500 table-auto text-center"
@@ -64,25 +43,31 @@
             <tr class="">
               <th
                 scope="col"
+                class="px-6 py-3 2xl:w-12 cursor-pointer hover:text-blue-600"
+              >
+                ID
+              </th>
+              <th
+                scope="col"
                 class="px-6 py-3 2xl:w-32 cursor-pointer hover:text-blue-600"
               >
                 Дата
               </th>
               <th
                 scope="col"
-                class="px-6 py-3 2xl:w-48 cursor-pointer hover:text-blue-600"
+                class="px-6 py-3 2xl:w-36 cursor-pointer hover:text-blue-600"
               >
                 Группа тем
               </th>
               <th
                 scope="col"
-                class="px-6 py-3 2xl:w-40 cursor-pointer hover:text-blue-600"
+                class="px-6 py-3 2xl:w-24 cursor-pointer hover:text-blue-600"
               >
                 Тема
               </th>
               <th
                 scope="col"
-                class="px-6 py-3 2xl:w-44 cursor-pointer hover:text-blue-600"
+                class="px-6 py-3 2xl:w-24 cursor-pointer hover:text-blue-600"
               >
                 Локация
               </th>
@@ -94,7 +79,7 @@
               </th>
               <th
                 scope="col"
-                class="px-6 py-3 2xl:w-60 cursor-pointer hover:text-blue-600"
+                class="px-6 py-3 2xl:w-96 cursor-pointer hover:text-blue-600"
               >
                 Исполнитель
               </th>
@@ -107,27 +92,30 @@
             </tr>
           </thead>
           <tbody class="font-semibold">
-            <tr class="bg-white border-b hover:bg-gray-50 cursor-pointer">
-              <td class="px-6 py-4 hover:text-blue-600 text-center">
-                {{ responed_data.date }}
+            <tr
+              v-for="(el, index) in db_list" :key="index"
+              class="bg-white border-b hover:bg-gray-50 cursor-pointer hover:text-blue-600"
+            >
+              <th
+                scope="row"
+                class="px-2 py-2 max-w-lg font-medium text-gray-900 whitespace-nowrap truncate text-center"
+              >
+                {{index + 1}}
+              </th>
+              <td class="px-6 py-4 text-center">{{el.date}}</td>
+              <td class="px-6 py-4 text-center">{{ el.group }}</td>
+              <td class="px-6 py-4 text-center">
+                {{el.theme}}
               </td>
-              <td class="px-6 py-4 text-center hover:text-blue-600">
-                {{ responed_data.group }}
-              </td>
-              <td class="px-6 py-4 text-center hover:text-blue-600">
-                {{ responed_data.theme }}
-              </td>
-              <td class="px-6 py-4 hover:text-blue-600 text-center">
-                <ul>
-                  <li v-for="loc in responed_data.loc" :key="loc">{{ loc }}</li>
+              <td class="px-6 py-4">
+                <ul> 
+                  <li v-for="loc in el.loc" :key="loc">{{ loc }} </li>
                 </ul>
               </td>
-              <td class="px-6 py-4 text-justify hover:text-blue-600">
-                {{ responed_data.message }}
-              </td>
+              <td class="px-6 py-4 text-justify">{{ el.message }}</td>
               <td class="px-6 py-4 hover:text-blue-600 cursor-pointer">
                 <select
-                  id="company"
+                  id="companyFile"
                   class="bg-gray-50 border border-gray-300 cursor-pointer text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 >
                   <option selected>Выберите исполнителя</option>
@@ -142,14 +130,14 @@
                 </select>
               </td>
               <td class="px-6 py-4 text-justify hover:text-blue-600">
-                <Map :text="responed_data.message" :theme="responed_data.theme" :loc_list="responed_data.coords"></Map>
+                <Map :loc_list="el.coords"></Map>
               </td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 <script>
@@ -158,7 +146,7 @@ import Map from "@/components/Map.vue"
 export default {
   components: {Map},
   props: {
-    org_list: Array,
+    db_list: Array,
   },
   data() {
     return {
@@ -168,24 +156,6 @@ export default {
       isError: false,
     };
   },
-  methods: {
-    submit_text() {
-      this.isError = false;
-      this.isLoading = true;
-      axios
-        .post(
-          `https://${process.env.VUE_APP_USER_IP_WITH_PORT}/api/add_message_all_pavlov`,
-          { message: this.input_text }
-        )
-        .then(
-          (response) => (
-            (this.responed_data = response.data),
-            console.log(this.responed_data),
-            (this.isLoading = false)
-          )
-        )
-        .catch((response) => ((this.isLoading = false), (this.isError = true)));
-    },
-  },
+ 
 };
 </script>
